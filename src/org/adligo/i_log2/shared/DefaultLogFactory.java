@@ -1,6 +1,7 @@
 package org.adligo.i_log2.shared;
 
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 /**
  * This SHOULD NOT be used directly!  It is included as the
  * defulat method implementations of {@link I_LogCtx} and should
@@ -31,13 +32,20 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DefaultLogFactory {
   protected static final DefaultLogFactory THIS = new DefaultLogFactory();
-  private static final ConcurrentHashMap<String, DefaultLog> logs = new ConcurrentHashMap<>();
+  private static final ConcurrentHashMap<String, DefaultLog> LOGS = new ConcurrentHashMap<>();
+  private static final AtomicBoolean INIT = new AtomicBoolean(false);
+  
+  static {
+    if (!INIT.get()) {
+      System.out.println(I_LogConstants.I_LOG2_TEXT_ART);
+      INIT.set(true);
+    }
+  }
   
   private static DefaultLog getOrCreateLogInternal( 
       String logName, LogLevel level) {
-    logs.putIfAbsent(logName, new DefaultLog(logName, 
+    return LOGS.putIfAbsent(logName, new DefaultLog(logName, 
         level, System.out, System.err));
-    return logs.get(logName);
   }
   private final DefaultLog log;
   

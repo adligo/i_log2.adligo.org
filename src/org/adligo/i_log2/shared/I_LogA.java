@@ -2,7 +2,9 @@ package org.adligo.i_log2.shared;
 
 
 /**
- * This is the EXAMPLE of how to create your own 
+ * This is the EXAMPLE of how to create your own log annotation,
+ * which could be configured to delegate to slf4j or any other
+ * log system.
  * 
  * @author scott
  * This code lives (is maintained) here;
