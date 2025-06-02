@@ -1,5 +1,7 @@
 package org.adligo.i_log2.shared;
 
+import java.util.function.Supplier;
+
 /**
  * This is the logger interface, for writing log messages.
  * 
@@ -28,6 +30,77 @@ package org.adligo.i_log2.shared;
  */
 public interface I_Log {
 
+  
+  /**
+   * This is a functional style predicate that should prevent the creation of the string supplied
+   * with optimized branching.
+   * @param supplier
+   * @return
+   */
+  void ifDebug(Supplier<Object> supplier);
+  /**
+   * @see {@link I_Log#ifDebug(Supplier)}
+   * @param supplier
+   * @return
+   */
+  void ifD(Supplier<Object> supplier);
+  
+  /**
+   * This is a functional style predicate that should prevent the creation of the string supplied
+   * with optimized branching.
+   * @param supplier
+   * @return
+   */
+  void ifError(Supplier<Object> supplier);
+  /**
+   * @see {@link I_Log#ifInfo(Supplier)}
+   * @param supplier
+   * @return
+   */
+  void ifE(Supplier<Object> supplier);
+  
+  /**
+   * This is a functional style predicate that should prevent the creation of the string supplied
+   * with optimized branching.
+   * @param supplier
+   * @return
+   */
+  void ifInfo(Supplier<Object> supplier);
+  /**
+   * @see {@link I_Log#ifInfo(Supplier)}
+   * @param supplier
+   * @return
+   */
+  void ifI(Supplier<Object> supplier);
+  
+  /**
+   * This is a functional style predicate that should prevent the creation of the string supplied
+   * with optimized branching.
+   * @param supplier
+   * @return
+   */
+  void ifTrace(Supplier<Object> supplier);
+  /**
+   * @see {@link I_Log#ifTrace(Supplier)}
+   * @param supplier
+   * @return
+   */
+  void ifT(Supplier<Object> supplier);
+  
+  /**
+   * This is a functional style predicate that should prevent the creation of the string supplied
+   * with optimized branching.
+   * @param supplier
+   * @return
+   */
+  void ifWarn(Supplier<Object> supplier);
+  /**
+   * @see {@link I_Log#ifWarn(Supplier)}
+   * @param supplier
+   * @return
+   */
+  void ifW(Supplier<Object> supplier);
+  
   /**
    * this is for constant logs (static final Log) that need to be turned
    * off from the LogDispatcher (or other impl code) so that a StackOverflow can

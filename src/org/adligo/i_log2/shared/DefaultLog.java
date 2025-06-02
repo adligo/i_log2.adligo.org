@@ -2,6 +2,7 @@ package org.adligo.i_log2.shared;
 
 import java.io.PrintStream;
 import java.util.Objects;
+import java.util.function.Supplier;
 
 /**
  * This is the default simplest logger possible.
@@ -50,7 +51,67 @@ public class DefaultLog implements I_Log {
     this.out = Objects.requireNonNull(out, AN_OUTPUT_STREAM_IS_REQUIRED);
     this.err = Objects.requireNonNull(err, AN_ERROR_STREAM_IS_REQUIRED);
   }
-  
+
+  @Override
+  public void ifDebug(Supplier<Object> supplier) {
+    if (isDebugEnabled()) {
+      debug(supplier.get());
+    }
+  }
+
+  @Override
+  public void ifD(Supplier<Object> supplier) {
+    ifDebug(supplier);
+  }
+
+  @Override
+  public void ifError(Supplier<Object> supplier) {
+    if (isErrorEnabled()) {
+      error(supplier.get());
+    }
+  }
+
+  @Override
+  public void ifE(Supplier<Object> supplier) {
+    ifError(supplier);
+  }
+
+  @Override
+  public void ifInfo(Supplier<Object> supplier) {
+    if (isInfoEnabled()) {
+      info(supplier.get());
+    }
+  }
+
+  @Override
+  public void ifI(Supplier<Object> supplier) {
+    ifInfo(supplier);
+  }
+
+  @Override
+  public void ifTrace(Supplier<Object> supplier) {
+    if (isTraceEnabled()) {
+      trace(supplier.get());
+    }
+  }
+
+  @Override
+  public void ifT(Supplier<Object> supplier) {
+    ifTrace(supplier);
+  }
+
+  @Override
+  public void ifWarn(Supplier<Object> supplier) {
+    if (isWarnEnabled()) {
+      warn(supplier.get());
+    }
+  }
+
+  @Override
+  public void ifW(Supplier<Object> supplier) {
+    ifWarn(supplier);
+  }
+
   /**
    * @See {@link I_Log#isEnabled()}
    */
@@ -269,6 +330,7 @@ public class DefaultLog implements I_Log {
     }
     return sb.toString();
   }
+
   
 
 }
